@@ -10,7 +10,7 @@ int matrix[LINE][COLUMN];
 //https://en.wikipedia.org/wiki/Box-drawing_character#Unicode
 void printElement(int line, int column) {
   //Borda superior esquerda
-  if(line == 0 && column == 0 && matrix[line][column] == 1) { 
+  if(line == 0 && column == 0 && matrix[line][column] == 1) {
     printf("\u250C");
   //Borda inferior direita
   } else if (line == LINE - 1 && column == COLUMN - 1 && matrix[line][column] == 1) {
@@ -22,30 +22,30 @@ void printElement(int line, int column) {
   } else if (line == 0 && column == COLUMN - 1 && matrix[line][column] == 1) {
     printf("\u2510\n");
   //Borda superior intermediaria com barreira
-  } else if (line == 0 && matrix[line + 1][column] != 0 && matrix[line][column] == 1) {
+  } else if (line == 0 && matrix[line + 1][column] == 1 && matrix[line][column] == 1) {
     printf("\u252C");
   //Borda superior intermediaria sem barreira
-  } else if (line == 0 && matrix[line + 1][column] == 0 && matrix[line][column] == 1) {
+  } else if (line == 0 && matrix[line + 1][column] != 1 && matrix[line][column] == 1) {
     printf("\u2500");
   //Borda inferior intermediaria com barreira
-  } else if (line == LINE - 1 && matrix[line - 1][column] != 0 && matrix[line][column] == 1) {
+  } else if (line == LINE - 1 && matrix[line - 1][column] == 1 && matrix[line][column] == 1) {
     printf("\u2534");
   //Borda inferior intermediaria sem barreira
-  } else if (line == LINE - 1 && matrix[line - 1][column] == 0 && matrix[line][column] == 1) {
+  } else if (line == LINE - 1 && matrix[line - 1][column] != 1 && matrix[line][column] == 1) {
     printf("\u2500");
   //Borda intermediaria da esquerda com barreira
-  } else if (column == 0 && matrix[line][column + 1] != 0 && matrix[line][column] == 1) {
+  } else if (column == 0 && matrix[line][column + 1] == 1 && matrix[line][column] == 1) {
     printf("\u251C");
   //Borda intermediaria da esquerda sem barreira
-  } else if (column == 0 && matrix[line][column + 1] == 0 && matrix[line][column] == 1) {
+  } else if (column == 0 && matrix[line][column + 1] != 1 && matrix[line][column] == 1) {
     printf("\u2502");
   //Borda intermediaria da direita com barreira
-  } else if (column == COLUMN - 1 && matrix[line][column - 1] != 0 && matrix[line][column] == 1) {
+  } else if (column == COLUMN - 1 && matrix[line][column - 1] == 1 && matrix[line][column] == 1) {
     printf("\u2524\n");
   //Borda intermediaria da direita sem barreira
-  } else if (column == COLUMN - 1 && matrix[line][column - 1] == 0 && matrix[line][column] == 1) {
+  } else if (column == COLUMN - 1 && matrix[line][column - 1] != 0 && matrix[line][column] == 1) {
     printf("\u2502\n");
-  } else {
+  } else
     if (matrix[line - 1][column] == 1 && matrix[line + 1][column] == 1 && matrix[line][column - 1] == 1  && matrix[line][column + 1] == 1) {
       printf("\u253C");
     } else if (matrix[line + 1][column] == 1 && matrix[line][column - 1] == 1 && matrix[line][column + 1] == 1) {
@@ -60,13 +60,18 @@ void printElement(int line, int column) {
       printf("\u250C");
     } else if (matrix[line - 1][column] == 1 && matrix[line][column + 1] == 1) {
       printf("\u2514");
-    } else if (matrix[line - 1][column] == 1 && matrix[line + 1][column] == 1 && matrix[line][column - 1] == 1  && matrix[line][column + 1] == 1) {
-      printf("\u252C");
-    
-    printf(" ");
+    } else if (matrix[line + 1][column] == 1 && matrix[line][column - 1] == 1) {
+      printf("\u2510");
+    } else if (matrix[line][column - 1] == 1 && matrix[line][column + 1] == 1) {
+      printf("\u2500");
+    } else if (matrix[line - 1][column] == 1 && matrix[line + 1][column] == 1) {
+      printf("\u2502");
+    } else if (matrix[line - 1][column] == 1 && matrix[line][column - 1] == 1) {
+      printf("\u2519");
+    } else {
+      printf(" ");
+    }
   }
-  
-}
 
 //imprimir matrix do jogo
 void printMatrix () {
