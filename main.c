@@ -45,7 +45,7 @@ void printElement(int line, int column) {
   //Borda intermediaria da direita sem barreira
   } else if (column == COLUMN - 1 && matrix[line][column - 1] != 0 && matrix[line][column] == 1) {
     printf("\u2502\n");
-  } else
+  } else if (matrix[line][column] == 1) {
     if (matrix[line - 1][column] == 1 && matrix[line + 1][column] == 1 && matrix[line][column - 1] == 1  && matrix[line][column + 1] == 1) {
       printf("\u253C");
     } else if (matrix[line + 1][column] == 1 && matrix[line][column - 1] == 1 && matrix[line][column + 1] == 1) {
@@ -68,10 +68,11 @@ void printElement(int line, int column) {
       printf("\u2502");
     } else if (matrix[line - 1][column] == 1 && matrix[line][column - 1] == 1) {
       printf("\u2519");
-    } else {
-      printf(" ");
     }
+  } else {
+      printf(" ");
   }
+}
 
 //imprimir matrix do jogo
 void printMatrix () {
